@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyAI - Dil Ortağım</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        #chat-container { width: 90%; max-width: 400px; background: #1e293b; padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        #chat-box { height: 350px; overflow-y: auto; background: #0f172a; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 10px; border: 1px solid #334155; }
+        .msg { padding: 10px 15px; border-radius: 12px; font-size: 14px; max-width: 85%; line-height: 1.5; }
+        .user { background: #10b981; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .ai { background: #334155; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 2px; border-left: 3px solid #10b981; }
+        .input-area { display: flex; gap: 8px; }
+        input { flex: 1; padding: 12px; border-radius: 8px; border: none; outline: none; background: #334155; color: white; }
+        button { background: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #059669; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h2 style="text-align:center; color:#10b981; margin-top:0;">MyAI Multi-Lang</h2>
+        <div id="chat-box">
+            <div class="msg ai">Merhaba! Ben senin yapay zekanım. Hem Türkçe hem İngilizce konuşabiliriz!<br><br>Hello! I am your AI. We can talk in both Turkish and English!</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Mesaj yaz / Type a message...">
+            <button onclick="talk()">Gönder</button>
+        </div>
+    </div>
+
+    <script>
+        function talk() {
+            const input = document.getElementById('userInput');
+            const chatBox = document.getElementById('chat-box');
+            const text = input.value.toLowerCase().trim();
+            if(!text) return;
+
+            chatBox.innerHTML += `<div class="msg user">${input.value}</div>`;
+            input.value = "";
+
+            let reply = "";
+
+            // Çok dilli mantık (Zeka burası)
+            if(text.includes("selam") || text.includes("merhaba")) {
+                reply = "Selam! Harika bir gün geçiyor, değil mi? Senin için ne yapabilirim?";
+            } else if(text.includes("hello") || text.includes("hi")) {
+                reply = "Hello! I'm doing great. How is your English practice going?";
+            } else if(text.includes("nasılsın") || text.includes("how are you")) {
+                reply = "Harikayım! / I'm doing great! Siteni kurmuş olmandan dolayı çok mutluyum.";
+            } else if(text.includes("japanese") || text.includes("japonca")) {
+                reply = "Japonca öğrenmen harika! Kon'nichiwa! (こんにちは)";
+            } else if(text.includes("youtube")) {
+                reply = "YouTube kanalın için bu projeyi mutlaka anlatmalısın!";
+            } else {
+                reply = "Bunu anladım! Teknoloji ve diller hakkında konuşmaya devam edebiliriz. / I understood! We can keep talking about technology and languages.";
+            }
+
+            setTimeout(() => {
+                chatBox.innerHTML += `<div class="msg ai">${reply}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
